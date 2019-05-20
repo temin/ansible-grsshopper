@@ -1,0 +1,60 @@
+---
+- name: Install additional packages and Perl modules
+  apt:
+    name: "{{ packages }}"
+    state: latest
+  vars:
+    packages:
+      - libmime-types-perl
+      - libcgi-session-perl
+      - liblingua-en-inflect-perl
+      - libjson-perl
+      - libjson-xs-perl
+      - libnet-facebook-oauth2-perl
+      - libxml-opml-perl
+      - libnet-twitter-lite-perl
+      - libdigest-sha-perl
+      - libtext-vcard-perl
+      - libnet-oauth-perl
+      - libdbd-mysql-perl
+      - libgd-perl
+      - libapache2-mod-perl2
+      - liblocal-lib-perl
+      
+- name: Create Perl folder 
+  file:
+    path: /var/www/perl5
+    state: directory
+    owner: www-data
+    group: www-data
+
+# install Perl modules with cpanm
+- name: Install MIME::Lite::TT::HTML module
+  cpanm:
+    name: MIME::Lite::TT::HTML
+
+- name: Install REST::Client module
+  cpanm:
+    name: REST::Client
+
+- name: Install Email::Stuffer module
+  cpanm:
+    name: Email::Stuffer
+
+- name: Install Image::Resize module
+  cpanm:
+    name: Image::Resize
+
+- name: Install Digest::SHA1 module
+  cpanm:
+    name: Digest::SHA1
+
+- name: Install JSON::Parse module
+  cpanm:
+    name: JSON::Parse
+
+- name: Install Mastodon::Client module
+  cpanm:
+    name: Mastodon::Client
+
+

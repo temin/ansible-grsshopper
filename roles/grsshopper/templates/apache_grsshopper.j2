@@ -1,0 +1,17 @@
+<VirtualHost *:80>
+
+        ServerName {{ grsshopper_domain_name }}
+
+        DocumentRoot {{ grsshopper_root_folder }}
+
+        ScriptAlias /cgi-bin/ {{ grsshopper_root_folder }}/cgi-bin/
+        <Directory "{{ grsshopper_root_folder }}/cgi-bin">
+                AllowOverride None
+                Options +ExecCGI -MultiViews +SymLinksIfOwnerMatch
+                Require all granted
+        </Directory>
+
+        ErrorLog ${APACHE_LOG_DIR}/grsshopper-error.log
+        CustomLog ${APACHE_LOG_DIR}/grsshopper-access.log combined
+
+</VirtualHost>

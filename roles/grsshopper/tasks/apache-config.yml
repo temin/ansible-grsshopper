@@ -1,0 +1,20 @@
+---
+- name: Copy config file
+  template: 
+    src: templates/apache_grsshopper.j2
+    dest: /etc/apache2/sites-available/grsshopper.conf
+    mode: 0644
+    
+- name: Enable Apache CGI module
+  shell: /usr/sbin/a2enmod cgid
+
+- name: Enable Apache rewrite module
+  shell: /usr/sbin/a2enmod rewrite
+
+- name: Enable Apache configuration
+  shell: /usr/sbin/a2ensite grsshopper.conf
+
+- name: Restart Apache
+  service:
+    name: apache2
+    state: restarted

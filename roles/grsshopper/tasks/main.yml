@@ -1,0 +1,57 @@
+---
+# Install Perl modules
+- name: Tasks for Debian 8
+  include_tasks: perl-modules-debian8.yml
+  tags:
+    - perl-modules
+  when: 
+    - ansible_facts['distribution'] == "Debian"
+    - ansible_facts['distribution_major_version'] == "8"
+
+- name: Tasks for Debian 9
+  include_tasks: perl-modules-debian9.yml
+  tags:
+    - perl-modules
+  when: 
+    - ansible_facts['distribution'] == "Debian"
+    - ansible_facts['distribution_major_version'] == "9"
+
+- name: Tasks for Ubuntu 14
+  include_tasks: perl-modules-ubuntu14.yml
+  tags:
+    - perl-modules
+  when: 
+    - ansible_facts['distribution'] == "Ubuntu"
+    - ansible_facts['distribution_major_version'] == "14"
+
+- name: Tasks for Ubuntu 16
+  include_tasks: perl-modules-ubuntu16.yml
+  tags:
+    - perl-modules
+  when: 
+    - ansible_facts['distribution'] == "Ubuntu"
+    - ansible_facts['distribution_major_version'] == "16"
+
+- name: Tasks for Ubuntu 18
+  include_tasks: perl-modules-ubuntu18.yml
+  tags:
+    - perl-modules
+  when: 
+    - ansible_facts['distribution'] == "Ubuntu"
+    - ansible_facts['distribution_major_version'] == "18"
+
+# Configure Apache server
+- import_tasks: apache-config.yml
+  tags:
+    - apache-config
+
+# Get gRSShopper code
+- import_tasks: grsshopper-code.yml
+  tags:
+    - grsshopper-code
+
+# Configure Mariadb/MySQL server
+- import_tasks: mariadb-config.yml
+  tags:
+    - mariadb-config
+

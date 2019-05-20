@@ -1,0 +1,17 @@
+---
+- name: Configure gRSShopper container
+  hosts: grsshopper
+  
+  vars:
+    grsshopper_domain_name: grsshopper.example.org
+    grsshopper_root_folder: /var/www/grsshopper
+    grsshopper_database_name: grsshopper
+    grsshopper_database_username: grsshopper
+    grsshopper_database_password: secret_password
+    grsshopper_site_key: secret_key
+    #grsshopper_git_repo: "https://github.com/Downes/gRSShopper.git"
+    grsshopper_git_repo: https://github.com/temin/gRSShopper.git
+    
+  roles:
+    - system-setup
+    - grsshopper

@@ -1,0 +1,16 @@
+---
+- name: Install additional packages
+  apt: 
+    name: "{{ packages }}"
+    state: latest
+    update_cache: yes
+  vars:
+    packages:
+      - apache2
+      - libapache2-mod-perl2
+      - mariadb-server
+      - python-mysqldb
+      - rsync
+      - cpanminus
+      - dh-make-perl
+      - git

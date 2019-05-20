@@ -1,0 +1,38 @@
+---
+
+- name: Get gRSShopper code from GitHub
+  git:
+    repo: "{{ grsshopper_git_repo }}"
+    dest: /root/grsshopper-git
+    
+- name: Create website root folder
+  file:
+    path: "{{ grsshopper_root_folder }}"
+    state: directory
+
+- name: Synchronize the cgi-bin folder to the appropriate locations
+  synchronize:
+    src: /root/grsshopper-git/cgi-bin
+    dest: "{{ grsshopper_root_folder }}"
+  delegate_to: "{{ inventory_hostname }}"
+  
+- name: Synchronize the html' folder to the appropriate locations
+  synchronize:
+    src: /root/grsshopper-git/html/
+    dest: "{{ grsshopper_root_folder }}"
+  delegate_to: "{{ inventory_hostname }}"
+  
+- name: Create cgi-bin data root folder
+  file:
+    path: "{{ grsshopper_root_folder }}/cgi-bin/data"
+    state: directory
+    owner: www-data
+    group: www-data
+
+- name: Change file permissions
+  file:
+    dest: "{{ grsshopper_root_folder }}"
+    owner: www-data
+    group: www-data
+    mode: 0750
+    recurse: yes
